@@ -46,8 +46,6 @@ export default class App extends Component {
                 </button>
 
                 <PeoplePage />
-                <PeoplePage />
-                <PeoplePage />
             </div>
         );
     }
