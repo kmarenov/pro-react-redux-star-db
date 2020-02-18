@@ -1,21 +1,8 @@
 import React, { Component } from 'react';
-
 import './item-list.css';
-import Spinner from "../spinner";
+import { withData } from '../hoc-helpers';
 
-export default class ItemList extends Component {
-    state = {
-        itemList: null
-    };
-
-    componentDidMount() {
-        const { getData } = this.props;
-
-        getData()
-            .then(itemList => this.setState({ itemList }))
-        ;
-    }
-
+class ItemList extends Component {
     renderItems(arr) {
         return arr.map((item) => {
             const { id } = item;
@@ -33,13 +20,7 @@ export default class ItemList extends Component {
     }
 
     render() {
-        const { itemList } = this.state;
-
-        if (!itemList) {
-            return <Spinner />;
-        }
-
-        const items = this.renderItems(itemList);
+        const items = this.renderItems(this.props.data);
 
         return (
             <ul className="item-list list-group">
@@ -48,3 +29,5 @@ export default class ItemList extends Component {
         );
     }
 }
+
+export default withData(ItemList);
