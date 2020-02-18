@@ -6,12 +6,17 @@ import RandomPlanet from '../random-planet';
 import './app.css';
 import ErrorIndicator from "../error-indicator";
 import PeoplePage from "../people-page/people-page";
+import ItemList from "../item-list";
+import PersonDetails from "../person-details";
+import SwapiService from "../../services/swapi-service";
 
 export default class App extends Component {
     state = {
         showRandomPlanet: true,
         hasError: false
     };
+
+    swapiService = new SwapiService();
 
     componentDidCatch(error, errorInfo) {
         this.setState({ hasError: true });
@@ -35,7 +40,7 @@ export default class App extends Component {
             null;
 
         return (
-            <div>
+            <div className="stardb-app">
                 <Header />
                 { planet }
 
@@ -46,6 +51,17 @@ export default class App extends Component {
                 </button>
 
                 <PeoplePage />
+
+                <div className="row mb2">
+                    <div className="col-md-6">
+                        <ItemList
+                            onItemSelected={this.onPersonSelected}
+                            getData={this.swapiService.getAllPlanets} />
+                    </div>
+                    <div className="col-md-6">
+                        <PersonDetails personId={this.state.selectedPerson} />
+                    </div>
+                </div>
             </div>
         );
     }
