@@ -4,7 +4,7 @@ import ItemList from '../item-list';
 import SwapiService from '../../services/swapi-service';
 import Row from '../row';
 import ErrorBoundry from '../error-boundry';
-import ItemDetails from "../item-details";
+import ItemDetails, { Record } from '../item-details';
 
 export default class PeoplePage extends Component {
     state = {
@@ -31,7 +31,11 @@ export default class PeoplePage extends Component {
         const personDetails = (
             <ItemDetails itemId={this.state.selectedPerson}
                          getData={this.swapiService.getPerson}
-                         getImageUrl={this.swapiService.getPersonImage} />
+                         getImageUrl={this.swapiService.getPersonImage}>
+                <Record field="gender" label="Gender" />
+                <Record field="birthYear" label="Birth year" />
+                <Record field="eyeColor" label="Eye color" />
+            </ItemDetails>
         );
 
         return (

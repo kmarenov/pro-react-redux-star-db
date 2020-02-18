@@ -4,7 +4,7 @@ import RandomPlanet from '../random-planet';
 import './app.css';
 import ErrorIndicator from '../error-indicator';
 import PeoplePage from '../people-page/people-page';
-import ItemDetails from '../item-details';
+import ItemDetails, { Record } from '../item-details';
 import ItemList from '../item-list';
 import SwapiService from "../../services/swapi-service";
 
@@ -61,7 +61,11 @@ export default class App extends Component {
                     <div className="col-md-6">
                         <ItemDetails itemId={3}
                                      getData={this.swapiService.getPlanet}
-                                     getImageUrl={this.swapiService.getPlanetImage}/>
+                                     getImageUrl={this.swapiService.getPlanetImage}>
+                            <Record field="population" label="Population" />
+                            <Record field="rotationPeriod" label="Rotation period" />
+                            <Record field="diameter" label="Diameter" />
+                        </ItemDetails>
                     </div>
                 </div>
 
@@ -76,7 +80,11 @@ export default class App extends Component {
                     <div className="col-md-6">
                         <ItemDetails itemId={5}
                                      getData={this.swapiService.getStarship}
-                                     getImageUrl={this.swapiService.getStarshipImage} />
+                                     getImageUrl={this.swapiService.getStarshipImage}>
+                            <Record field="model" label="Model" />
+                            <Record field="manufacturer" label="Manufacturer" />
+                            <Record field="costInCredits" label="Cost in credits" />
+                        </ItemDetails>
                     </div>
                 </div>
             </div>
