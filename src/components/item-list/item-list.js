@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import './item-list.css';
-import { withData } from '../hoc-helpers';
 
-class ItemList extends Component {
+export default class ItemList extends Component {
     renderItems(arr) {
         return arr.map((item) => {
             const { id } = item;
@@ -29,5 +28,3 @@ class ItemList extends Component {
         );
     }
 }
-
-export default withData(ItemList);

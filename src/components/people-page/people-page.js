@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
 import './people-page.css';
-import ItemList from '../item-list';
-import SwapiService from '../../services/swapi-service';
 import Row from '../row';
-import ItemDetails, { Record } from '../item-details';
+import {PersonDetails, PersonList} from '../sw-components';
 
 export default class PeoplePage extends Component {
     state = {
         selectedPerson: 3
     };
-
-    swapiService = new SwapiService();
 
     onPersonSelected = (id) => {
         this.setState({ selectedPerson: id });
@@ -18,23 +14,13 @@ export default class PeoplePage extends Component {
 
     render() {
         const itemList = (
-            <ItemList
-                onItemSelected={this.onPersonSelected}
-                getData={this.swapiService.getAllPeople}>
-
+            <PersonList onItemSelected={this.onPersonSelected}>
                 {i => `${i.name} (${i.birthYear})`}
-
-            </ItemList>
+            </PersonList>
         );
 
         const personDetails = (
-            <ItemDetails itemId={this.state.selectedPerson}
-                         getData={this.swapiService.getPerson}
-                         getImageUrl={this.swapiService.getPersonImage}>
-                <Record field="gender" label="Gender" />
-                <Record field="birthYear" label="Birth year" />
-                <Record field="eyeColor" label="Eye color" />
-            </ItemDetails>
+            <PersonDetails itemId={this.state.selectedPerson} />
         );
 
         return <Row left={itemList} right={personDetails} />;
