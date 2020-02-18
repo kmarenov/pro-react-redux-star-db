@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Spinner from '../spinner';
+import ErrorBoundry from '../error-boundry';
 
 const withData = (View) => {
     return class extends Component {
@@ -22,7 +23,11 @@ const withData = (View) => {
                 return <Spinner />;
             }
 
-            return <View {...this.props} data={data} />
+            return (
+                <ErrorBoundry>
+                    <View {...this.props} data={data} />
+                </ErrorBoundry>
+            );
         }
     }
 };
