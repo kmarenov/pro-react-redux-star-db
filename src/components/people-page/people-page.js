@@ -26,10 +26,13 @@ export default class PeoplePage extends Component {
                 {i => `${i.name} (${i.birthYear})`}
 
             </ItemList>
-            )
-        ;
+        );
 
-        const personDetails = <ItemDetails itemId={this.state.selectedPerson} />;
+        const personDetails = (
+            <ItemDetails itemId={this.state.selectedPerson}
+                         getData={this.swapiService.getPerson}
+                         getImageUrl={this.swapiService.getPersonImage} />
+        );
 
         return (
             <ErrorBoundry>

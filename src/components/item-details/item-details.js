@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 
 import './item-details.css';
-import SwapiService from '../../services/swapi-service';
 import Spinner from '../spinner';
 
 export default class ItemDetails extends Component {
-    swapiService = new SwapiService();
-
     state = {
         item: null,
         loading: true,
+        image: null
     };
 
     componentDidMount() {
@@ -23,7 +21,7 @@ export default class ItemDetails extends Component {
     }
 
     updateItem() {
-        const { itemId } = this.props;
+        const { itemId, getData, getImageUrl } = this.props;
 
         if (!itemId) {
             return;
@@ -31,9 +29,12 @@ export default class ItemDetails extends Component {
 
         this.setState(() => { return { loading: true }});
 
-        this.swapiService
-            .getPerson(itemId)
-            .then(item => this.setState({ item, loading: false }));
+        getData(itemId)
+            .then(item => this.setState({
+                item,
+                loading: false,
+                image: getImageUrl(item)
+            }));
     }
 
     render() {
@@ -41,10 +42,10 @@ export default class ItemDetails extends Component {
             return <span>Select a item from a list</span>;
         }
 
-        const { item, loading } = this.state;
+        const { item, loading, image } = this.state;
 
         const spinner = loading ? <Spinner/> : null;
-        const content = !loading ? <ItemView item={ item } /> : null;
+        const content = !loading ? <ItemView item={ item } image={ image } /> : null;
 
         return (
             <div className="item-details card">
@@ -55,13 +56,12 @@ export default class ItemDetails extends Component {
     }
 }
 
-const ItemView = ({ item }) => {
+const ItemView = ({ item, image }) => {
     const { id, name, gender, birthYear, eyeColor } = item;
 
     return (
       <React.Fragment>
-          <img className="item-image"
-               src={`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`} />
+          <img className="item-image" src={ image } />
 
           <div className="card-body">
               <h4>{name}</h4>
@@ -83,3 +83,4 @@ const ItemView = ({ item }) => {
       </React.Fragment>
     );
 };
+

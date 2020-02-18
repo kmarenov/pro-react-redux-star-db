@@ -1,17 +1,20 @@
 import React, { Component } from 'react';
-
 import Header from '../header';
 import RandomPlanet from '../random-planet';
-
 import './app.css';
-import ErrorIndicator from "../error-indicator";
-import PeoplePage from "../people-page/people-page";
+import ErrorIndicator from '../error-indicator';
+import PeoplePage from '../people-page/people-page';
+import ItemDetails from '../item-details';
+import ItemList from '../item-list';
+import SwapiService from "../../services/swapi-service";
 
 export default class App extends Component {
     state = {
         showRandomPlanet: true,
         hasError: false
     };
+
+    swapiService = new SwapiService();
 
     componentDidCatch(error, errorInfo) {
         this.setState({ hasError: true });
@@ -47,7 +50,6 @@ export default class App extends Component {
 
                 <PeoplePage />
 
-                {/*
                 <div className="row mb2">
                     <div className="col-md-6">
                         <ItemList
@@ -57,7 +59,9 @@ export default class App extends Component {
                         </ItemList>
                     </div>
                     <div className="col-md-6">
-                        <PersonDetails personId={this.state.selectedPerson} />
+                        <ItemDetails itemId={3}
+                                     getData={this.swapiService.getPlanet}
+                                     getImageUrl={this.swapiService.getPlanetImage}/>
                     </div>
                 </div>
 
@@ -70,10 +74,11 @@ export default class App extends Component {
                         </ItemList>
                     </div>
                     <div className="col-md-6">
-                        <PersonDetails personId={this.state.selectedPerson} />
+                        <ItemDetails itemId={5}
+                                     getData={this.swapiService.getStarship}
+                                     getImageUrl={this.swapiService.getStarshipImage} />
                     </div>
                 </div>
-                */}
             </div>
         );
     }
