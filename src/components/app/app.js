@@ -34,22 +34,6 @@ export default class App extends Component {
             <RandomPlanet/> :
             null;
 
-        const planetList = (
-            <PlanetList onItemSelected={this.onPersonSelected}>
-                {(item) => item.name}
-            </PlanetList>
-        );
-
-        const planetDetails = <PlanetDetails itemId={3} />;
-
-        const starshipList = (
-            <StarshipList onItemSelected={this.onPersonSelected}>
-                {(item) => item.name}
-            </StarshipList>
-        );
-
-        const starshipDetails = <StarshipDetails itemId={5} />;
-
         return (
             <div className="stardb-app">
                 <Header />
@@ -63,9 +47,9 @@ export default class App extends Component {
 
                 <PeoplePage />
 
-                <Row left={planetList} right={planetDetails} />
+                <Row left={<PlanetList onItemSelected={this.onPersonSelected} />} right={<PlanetDetails itemId={3} />} />
 
-                <Row left={starshipList} right={starshipDetails} />
+                <Row left={<StarshipList onItemSelected={this.onPersonSelected} />} right={<StarshipDetails itemId={5} />} />
             </div>
         );
     }
