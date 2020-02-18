@@ -6,17 +6,12 @@ import RandomPlanet from '../random-planet';
 import './app.css';
 import ErrorIndicator from "../error-indicator";
 import PeoplePage from "../people-page/people-page";
-import ItemList from "../item-list";
-import PersonDetails from "../person-details";
-import SwapiService from "../../services/swapi-service";
 
 export default class App extends Component {
     state = {
         showRandomPlanet: true,
         hasError: false
     };
-
-    swapiService = new SwapiService();
 
     componentDidCatch(error, errorInfo) {
         this.setState({ hasError: true });
@@ -52,12 +47,14 @@ export default class App extends Component {
 
                 <PeoplePage />
 
+                {/*
                 <div className="row mb2">
                     <div className="col-md-6">
                         <ItemList
                             onItemSelected={this.onPersonSelected}
-                            getData={this.swapiService.getAllPlanets}
-                            renderItem={(item) => item.name} />
+                            getData={this.swapiService.getAllPlanets}>
+                            {(item) => item.name}
+                        </ItemList>
                     </div>
                     <div className="col-md-6">
                         <PersonDetails personId={this.state.selectedPerson} />
@@ -68,13 +65,15 @@ export default class App extends Component {
                     <div className="col-md-6">
                         <ItemList
                             onItemSelected={this.onPersonSelected}
-                            getData={this.swapiService.getAllStarships}
-                            renderItem={(item) => item.name} />
+                            getData={this.swapiService.getAllStarships}>
+                            {(item) => item.name}
+                        </ItemList>
                     </div>
                     <div className="col-md-6">
                         <PersonDetails personId={this.state.selectedPerson} />
                     </div>
                 </div>
+                */}
             </div>
         );
     }
