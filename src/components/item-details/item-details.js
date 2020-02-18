@@ -13,13 +13,12 @@ const Record =  ({ item, field, label }) => {
 };
 
 export {
-  Record
+    Record
 };
 
 export default class ItemDetails extends Component {
     state = {
         item: null,
-        loading: true,
         image: null
     };
 
@@ -40,30 +39,31 @@ export default class ItemDetails extends Component {
             return;
         }
 
-        this.setState(() => { return { loading: true }});
+        this.setState(() => { return { item: null }});
 
         getData(itemId)
             .then(item => this.setState({
                 item,
-                loading: false,
                 image: getImageUrl(item)
             }));
     }
 
     render() {
+        /*
         if (!this.state.item) {
             return <span>Select a item from a list</span>;
         }
+        */
 
-        const { item, loading, image } = this.state;
+        const { item, image } = this.state;
 
-        const spinner = loading ? <Spinner/> : null;
-        const content = !loading ? <ItemView item={ item } image={ image }>{this.props.children}</ItemView> : null;
+        if (!item) {
+            return <Spinner />;
+        }
 
         return (
             <div className="item-details card">
-                {spinner}
-                {content}
+                <ItemView item={ item } image={ image }>{this.props.children}</ItemView>
             </div>
         )
     }
