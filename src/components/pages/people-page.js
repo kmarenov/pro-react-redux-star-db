@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './people-page.css';
 import Row from '../row';
 import {PersonDetails, PersonList} from '../sw-components';
 
