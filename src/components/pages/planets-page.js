@@ -4,16 +4,18 @@ import {PlanetDetails, PlanetList} from '../sw-components';
 
 export default class PlanetsPage extends Component {
     state = {
-        selectedPlanet: 3
+        selectedItem: 3
     };
 
-    onPlanetSelected = (id) => {
-        this.setState({ selectedPlanet: id });
+    onItemSelected = (selectedItem) => {
+        this.setState({ selectedItem });
     };
 
     render() {
+        const { selectedItem } = this.state;
+
         return <Row
-            left={<PlanetList onItemSelected={this.onPlanetSelected} />}
-            right={<PlanetDetails itemId={this.state.selectedPlanet} />} />;
+            left={<PlanetList onItemSelected={this.onItemSelected} />}
+            right={<PlanetDetails itemId={selectedItem} />} />;
     }
 }

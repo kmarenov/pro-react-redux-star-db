@@ -4,16 +4,18 @@ import {StarshipDetails, StarshipList} from '../sw-components';
 
 export default class StarshipsPage extends Component {
     state = {
-        selectedStarship: 5
+        selectedItem: 5
     };
 
-    onStarshipSelected = (id) => {
-        this.setState({ selectedStarship: id });
+    onItemSelected = (selectedItem) => {
+        this.setState({ selectedItem });
     };
 
     render() {
+        const { selectedItem } = this.state;
+
         return <Row
-            left={<StarshipList onItemSelected={this.onStarshipSelected} />}
-            right={<StarshipDetails itemId={this.state.selectedStarship} />} />;
+            left={<StarshipList onItemSelected={this.onItemSelected} />}
+            right={<StarshipDetails itemId={selectedItem} />} />;
     }
 }

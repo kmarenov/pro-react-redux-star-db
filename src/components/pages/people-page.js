@@ -4,16 +4,18 @@ import {PersonDetails, PersonList} from '../sw-components';
 
 export default class PeoplePage extends Component {
     state = {
-        selectedPerson: 3
+        selectedItem: 3
     };
 
-    onPersonSelected = (id) => {
-        this.setState({ selectedPerson: id });
+    onItemSelected = (selectedItem) => {
+        this.setState({ selectedItem });
     };
 
     render() {
+        const { selectedItem } = this.state;
+
         return <Row
-            left={<PersonList onItemSelected={this.onPersonSelected} />}
-            right={<PersonDetails itemId={this.state.selectedPerson} />} />;
+            left={<PersonList onItemSelected={this.onItemSelected} />}
+            right={<PersonDetails itemId={selectedItem} />} />;
     }
 }
