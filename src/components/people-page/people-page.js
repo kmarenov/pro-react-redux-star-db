@@ -13,14 +13,8 @@ export default class PeoplePage extends Component {
     };
 
     render() {
-        const itemList = (
-            <PersonList onItemSelected={this.onPersonSelected} />
-        );
-
-        const personDetails = (
-            <PersonDetails itemId={this.state.selectedPerson} />
-        );
-
-        return <Row left={itemList} right={personDetails} />;
+        return <Row
+            left={<PersonList onItemSelected={this.onPersonSelected} />}
+            right={<PersonDetails itemId={this.state.selectedPerson} />} />;
     }
 }
