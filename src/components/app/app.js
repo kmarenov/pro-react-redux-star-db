@@ -14,7 +14,7 @@ export default class App extends Component {
                 <SwapiServiceProvider value={new SwapiService()}>
                     <div className="stardb-app">
                         <Header />
-                        <RandomPlanet/>
+                        <RandomPlanet />
                         <PeoplePage />
                         <PlanetsPage />
                         <StarshipsPage />
